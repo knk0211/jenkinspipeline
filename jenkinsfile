@@ -1,0 +1,20 @@
+pipeline {
+   agent {
+     docker { 
+           image= maven:3.8.1-adoptopenjdk-11
+      }
+    }
+     stages {
+        stage('scm checkout') {
+         steps{
+           git branch: 'main', url: 'git@github.com:knk0211/jenkinspipeline.git'   
+          }       
+       }
+        stage('build') {
+            steps {
+            sh 'mvn clean package'
+         }      
+       }
+    }
+   }
+
